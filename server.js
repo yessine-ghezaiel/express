@@ -12,10 +12,19 @@ app.get('/stylesheet.css', (req, res) => {
 
 app.use(function (req,res,next) {
     const day =date.getDay()
-    const hour =date.getHours(); 
-  ((5 < day && day < 1) && (17 < hour  && hour < 9 )  === true ) ? res.sendFile(__dirname + '/public/unavailable.html') : next();
+    const hour =date.getHours();
+  ((day === 0 || day === 6) || ( hour < 9 || hour > 17)) ?   res.sendFile(__dirname + '/public/unavailable.html') : next();
 })
+
 app.use(express.static('public'))
+const hour =date.getHours()
+console.log(hour)
+const h =  17 < hour 
+const r= hour < 9
+const yoyo =r && h
+console.log(h)
+console.log(r)
+console.log(yoyo)
 // last step : listen to the port
 app.listen( port ,(err)=>{
     err ? console.log(err) : console.log('welcome yessine')
